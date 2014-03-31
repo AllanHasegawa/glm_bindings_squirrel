@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 
 #include <glm/glm.hpp>
@@ -17,13 +18,6 @@ static void printfunc(HSQUIRRELVM v,const SQChar *s,...) {
 	va_end(vl);
 }
 
-string nut_src = R"(
-
-my_vec3 <- vec3(1,2,3);
-::print(my_vec3.x + "\n");
-
-)";
-
 /*
  * [TODO] proper unit tests
  */
@@ -36,9 +30,16 @@ int main()
 		bind_glm_squirrel(vm);
 
 		Script script(vm);
-
 		string error_msg;
-		if (!script.CompileString(nut_src, error_msg)) {
+		if (!script.CompileFile("test_scripts/vec3_ops.nut", error_msg)) {
+			cout << error_msg << endl;
+			return 0;
+		}
+		if (!script.Run(error_msg)) {
+			cout << error_msg << endl;
+			return 0;
+		}
+		if (!script.CompileFile("test_scripts/vec2_ops.nut", error_msg)) {
 			cout << error_msg << endl;
 			return 0;
 		}
