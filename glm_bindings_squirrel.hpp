@@ -331,6 +331,30 @@ void bind_glm_core(HSQUIRRELVM vm)
 
 	Class<vec2> c_vec2(vm, "vec2", false);
 	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("abs", &glm::abs);
+
+	Class<vec3> c_vec3(vm, "vec3", false);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("abs", &glm::abs);
+
+	Class<vec4> c_vec4(vm, "vec4", false);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("abs", &glm::abs);
+
+	Class<ivec2> c_ivec2(vm, "ivec2", false);
+	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&)>("abs", &glm::abs);
+
+	Class<ivec3> c_ivec3(vm, "ivec3", false);
+	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&)>("abs", &glm::abs);
+
+	Class<ivec4> c_ivec4(vm, "ivec4", false);
+	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&)>("abs", &glm::abs);
+
+	Class<uvec2> c_uvec2(vm, "uvec2", false);
+	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&)>("abs", &glm::abs);
+
+	Class<uvec3> c_uvec3(vm, "uvec3", false);
+	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&)>("abs", &glm::abs);
+
+	Class<uvec4> c_uvec4(vm, "uvec4", false);
+	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&)>("abs", &glm::abs);
 }
 
 static std::string to_string(const glm::vec2& kV)

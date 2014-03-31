@@ -18,6 +18,18 @@ static void printfunc(HSQUIRRELVM v,const SQChar *s,...) {
 	va_end(vl);
 }
 
+void compile_and_run(const std::string& kFileName, Sqrat::Script& script)
+{
+	string error_msg;
+	if (!script.CompileFile(kFileName, error_msg)) {
+		cout << error_msg << endl;
+		return;
+	}
+	if (!script.Run(error_msg)) {
+		cout << error_msg << endl;
+		return;
+	}
+}
 /*
  * [TODO] proper unit tests
  */
@@ -30,23 +42,9 @@ int main()
 		bind_glm_squirrel(vm);
 
 		Script script(vm);
-		string error_msg;
-		if (!script.CompileFile("test_scripts/vec3_ops.nut", error_msg)) {
-			cout << error_msg << endl;
-			return 0;
-		}
-		if (!script.Run(error_msg)) {
-			cout << error_msg << endl;
-			return 0;
-		}
-		if (!script.CompileFile("test_scripts/vec2_ops.nut", error_msg)) {
-			cout << error_msg << endl;
-			return 0;
-		}
-		if (!script.Run(error_msg)) {
-			cout << error_msg << endl;
-			return 0;
-		}
+		compile_and_run("test_scripts/vec2_ops.nut", script);
+		compile_and_run("test_scripts/vec3_ops.nut", script);
+		compile_and_run("test_scripts/abs.nut", script);
 	}
 	sq_close(vm);
 
