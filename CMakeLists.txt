@@ -39,8 +39,8 @@ target_link_libraries(tests ${SQUIRREL_LIBRARIES})
 # ******************************** 
 # [TODO] make portable :(
 # ******************************** 
-#if (UNIX)
-#	add_custom_command(TARGET mrt POST_BUILD COMMAND
-#		ln -sf ${CMAKE_SOURCE_DIR}/nut*
-#		${CMAKE_BINARY_DIR}/)
-#endif()
+if (UNIX)
+	add_custom_command(TARGET tests POST_BUILD COMMAND
+		ln -sf ${CMAKE_SOURCE_DIR}/test_scripts
+		${CMAKE_BINARY_DIR}/)
+endif()
