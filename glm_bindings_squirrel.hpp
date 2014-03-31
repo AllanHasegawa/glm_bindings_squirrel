@@ -4,14 +4,27 @@
 #include <glm/glm.hpp>
 #include <sqrat.h>
 
-void bind_glm_types(HSQUIRRELVM vm);
+
+static std::string to_string(const glm::vec2& kV);
+static std::string to_string(const glm::vec3& kV);
+static std::string to_string(const glm::vec4& kV);
+static std::string to_string(const glm::ivec2& kV);
+static std::string to_string(const glm::ivec3& kV);
+static std::string to_string(const glm::ivec4& kV);
+static std::string to_string(const glm::uvec2& kV);
+static std::string to_string(const glm::uvec3& kV);
+static std::string to_string(const glm::uvec4& kV);
+
+void bind_glm_vec_types(HSQUIRRELVM);
+void bind_glm_core(HSQUIRRELVM);
 
 void bind_glm_squirrel(HSQUIRRELVM vm)
 {
-	bind_glm_types(vm);
+	bind_glm_vec_types(vm);
+	bind_glm_core(vm);
 }
 
-void bind_glm_types(HSQUIRRELVM vm)
+void bind_glm_vec_types(HSQUIRRELVM vm)
 {
 	using namespace Sqrat;
 	using namespace std;
@@ -38,6 +51,8 @@ void bind_glm_types(HSQUIRRELVM vm)
 			"_mul", &detail::operator*);
 	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&)>(
 			"_div", &detail::operator/);
+	c_vec2.GlobalFunc<string (*)(const vec2&)>(
+			"to_string", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const int&)>(
 			"_mod", &detail::operator%);
@@ -69,6 +84,8 @@ void bind_glm_types(HSQUIRRELVM vm)
 			"_mul", &detail::operator*);
 	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&)>(
 			"_div", &detail::operator/);
+	c_vec3.GlobalFunc<string (*)(const vec3&)>(
+			"to_string", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const int&)>(
 			"_mod", &detail::operator%);
@@ -102,6 +119,8 @@ void bind_glm_types(HSQUIRRELVM vm)
 			"_mul", &detail::operator*);
 	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&)>(
 			"_div", &detail::operator/);
+	c_vec4.GlobalFunc<string (*)(const vec4&)>(
+			"to_string", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const int&)>(
 			"_mod", &detail::operator%);
@@ -130,6 +149,8 @@ void bind_glm_types(HSQUIRRELVM vm)
 			"_mul", &detail::operator*);
 	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&,const ivec2&)>(
 			"_div", &detail::operator/);
+	c_ivec2.GlobalFunc<string (*)(const ivec2&)>(
+			"to_string", &to_string);
 	/* [TODO] modulo operator for ints? 
 	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&,const int&)>(
 			"_mod", &detail::operator%);
@@ -161,6 +182,8 @@ void bind_glm_types(HSQUIRRELVM vm)
 			"_mul", &detail::operator*);
 	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&,const ivec3&)>(
 			"_div", &detail::operator/);
+	c_ivec3.GlobalFunc<string (*)(const ivec3&)>(
+			"to_string", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&,const int&)>(
 			"_mod", &detail::operator%);
@@ -194,6 +217,8 @@ void bind_glm_types(HSQUIRRELVM vm)
 			"_mul", &detail::operator*);
 	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&,const ivec4&)>(
 			"_div", &detail::operator/);
+	c_ivec4.GlobalFunc<string (*)(const ivec4&)>(
+			"to_string", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&,const int&)>(
 			"_mod", &detail::operator%);
@@ -221,6 +246,8 @@ void bind_glm_types(HSQUIRRELVM vm)
 			"_mul", &detail::operator*);
 	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&,const uvec2&)>(
 			"_div", &detail::operator/);
+	c_uvec2.GlobalFunc<string (*)(const uvec2&)>(
+			"to_string", &to_string);
 	/* [TODO] modulo operator for unsigned ints? 
 	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&,const unsigned int&)>(
 			"_mod", &detail::operator%);
@@ -252,6 +279,8 @@ void bind_glm_types(HSQUIRRELVM vm)
 			"_mul", &detail::operator*);
 	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&,const uvec3&)>(
 			"_div", &detail::operator/);
+	c_uvec3.GlobalFunc<string (*)(const uvec3&)>(
+			"to_string", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&,const int&)>(
 			"_mod", &detail::operator%);
@@ -285,9 +314,89 @@ void bind_glm_types(HSQUIRRELVM vm)
 			"_mul", &detail::operator*);
 	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&,const uvec4&)>(
 			"_div", &detail::operator/);
+	c_uvec4.GlobalFunc<string (*)(const uvec4&)>(
+			"to_string", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&,const int&)>(
 			"_mod", &detail::operator%);
 			*/
 	RootTable(vm).Bind("uvec4", c_uvec4);
+}
+
+void bind_glm_core(HSQUIRRELVM vm)
+{
+	using namespace Sqrat;
+	using namespace std;
+	using namespace glm;
+
+	Class<vec2> c_vec2(vm, "vec2", false);
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("abs", &glm::abs);
+}
+
+static std::string to_string(const glm::vec2& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ")";
+}
+static std::string to_string(const glm::vec3& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ","
+		+ std::to_string(kV.z) + ")";
+}
+
+static std::string to_string(const glm::vec4& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ","
+		+ std::to_string(kV.z) + ","
+		+ std::to_string(kV.w) + ")";
+}
+
+static std::string to_string(const glm::ivec2& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ")";
+}
+static std::string to_string(const glm::ivec3& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ","
+		+ std::to_string(kV.z) + ")";
+}
+
+static std::string to_string(const glm::ivec4& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ","
+		+ std::to_string(kV.z) + ","
+		+ std::to_string(kV.w) + ")";
+}
+static std::string to_string(const glm::uvec2& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ")";
+}
+static std::string to_string(const glm::uvec3& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ","
+		+ std::to_string(kV.z) + ")";
+}
+
+static std::string to_string(const glm::uvec4& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ","
+		+ std::to_string(kV.z) + ","
+		+ std::to_string(kV.w) + ")";
 }
