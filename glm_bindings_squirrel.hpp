@@ -62,7 +62,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&)>(
 			"_div", &detail::operator/);
 	c_vec2.GlobalFunc<string (*)(const vec2&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const int&)>(
 			"_mod", &detail::operator%);
@@ -95,7 +95,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&)>(
 			"_div", &detail::operator/);
 	c_vec3.GlobalFunc<string (*)(const vec3&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const int&)>(
 			"_mod", &detail::operator%);
@@ -130,7 +130,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&)>(
 			"_div", &detail::operator/);
 	c_vec4.GlobalFunc<string (*)(const vec4&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const int&)>(
 			"_mod", &detail::operator%);
@@ -160,7 +160,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&,const ivec2&)>(
 			"_div", &detail::operator/);
 	c_ivec2.GlobalFunc<string (*)(const ivec2&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for ints? 
 	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&,const int&)>(
 			"_mod", &detail::operator%);
@@ -193,7 +193,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&,const ivec3&)>(
 			"_div", &detail::operator/);
 	c_ivec3.GlobalFunc<string (*)(const ivec3&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&,const int&)>(
 			"_mod", &detail::operator%);
@@ -228,7 +228,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&,const ivec4&)>(
 			"_div", &detail::operator/);
 	c_ivec4.GlobalFunc<string (*)(const ivec4&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&,const int&)>(
 			"_mod", &detail::operator%);
@@ -257,7 +257,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&,const uvec2&)>(
 			"_div", &detail::operator/);
 	c_uvec2.GlobalFunc<string (*)(const uvec2&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for unsigned ints? 
 	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&,const unsigned int&)>(
 			"_mod", &detail::operator%);
@@ -290,7 +290,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&,const uvec3&)>(
 			"_div", &detail::operator/);
 	c_uvec3.GlobalFunc<string (*)(const uvec3&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&,const int&)>(
 			"_mod", &detail::operator%);
@@ -325,7 +325,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&,const uvec4&)>(
 			"_div", &detail::operator/);
 	c_uvec4.GlobalFunc<string (*)(const uvec4&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&,const int&)>(
 			"_mod", &detail::operator%);
@@ -354,7 +354,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_bvec2.GlobalFunc<bvec2 (*)(const bvec2&,const bvec2&)>(
 			"_div", &detail::operator/);
 	c_bvec2.GlobalFunc<string (*)(const bvec2&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for unsigned ints? 
 	c_bvec2.GlobalFunc<bvec2 (*)(const bvec2&,const unsigned int&)>(
 			"_mod", &detail::operator%);
@@ -387,7 +387,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_bvec3.GlobalFunc<bvec3 (*)(const bvec3&,const bvec3&)>(
 			"_div", &detail::operator/);
 	c_bvec3.GlobalFunc<string (*)(const bvec3&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_bvec3.GlobalFunc<bvec3 (*)(const bvec3&,const int&)>(
 			"_mod", &detail::operator%);
@@ -422,7 +422,7 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 	c_bvec4.GlobalFunc<bvec4 (*)(const bvec4&,const bvec4&)>(
 			"_div", &detail::operator/);
 	c_bvec4.GlobalFunc<string (*)(const bvec4&)>(
-			"to_string", &to_string);
+			"_tostring", &to_string);
 	/* [TODO] modulo operator for floats? 
 	c_bvec4.GlobalFunc<bvec4 (*)(const bvec4&,const int&)>(
 			"_mod", &detail::operator%);
