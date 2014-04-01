@@ -1,5 +1,6 @@
 
 #include <string>
+#include <limits>
 
 #include <glm/glm.hpp>
 #include <sqrat.h>
@@ -14,12 +15,17 @@ static std::string to_string(const glm::ivec4& kV);
 static std::string to_string(const glm::uvec2& kV);
 static std::string to_string(const glm::uvec3& kV);
 static std::string to_string(const glm::uvec4& kV);
+static std::string to_string(const glm::bvec2& kV);
+static std::string to_string(const glm::bvec3& kV);
+static std::string to_string(const glm::bvec4& kV);
 
+void bind_glm_consts(HSQUIRRELVM vm);
 void bind_glm_vec_types(HSQUIRRELVM);
 void bind_glm_core(HSQUIRRELVM);
 
 void bind_glm_squirrel(HSQUIRRELVM vm)
 {
+	bind_glm_consts(vm);
 	bind_glm_vec_types(vm);
 	bind_glm_core(vm);
 }
@@ -321,6 +327,115 @@ void bind_glm_vec_types(HSQUIRRELVM vm)
 			"_mod", &detail::operator%);
 			*/
 	RootTable(vm).Bind("uvec4", c_uvec4);
+
+	/*
+	 * glm::bvec2
+	 */
+	Class<bvec2> c_bvec2(vm);
+	c_bvec2.Ctor();
+	c_bvec2.Ctor<unsigned int>();
+	c_bvec2.Ctor<unsigned int,unsigned int>();
+	c_bvec2.Var("x", &bvec2::x);
+	c_bvec2.Var("y", &bvec2::y);
+	c_bvec2.Var("r", &bvec2::r);
+	c_bvec2.Var("g", &bvec2::g);
+	c_bvec2.Var("s", &bvec2::r);
+	c_bvec2.Var("t", &bvec2::g);
+	c_bvec2.GlobalFunc<bvec2 (*)(const bvec2&,const bvec2&)>(
+			"_add", &detail::operator+);
+	c_bvec2.GlobalFunc<bvec2 (*)(const bvec2&,const bvec2&)>(
+			"_sub", &detail::operator-);
+	c_bvec2.GlobalFunc<bvec2 (*)(const bvec2&,const bvec2&)>(
+			"_mul", &detail::operator*);
+	c_bvec2.GlobalFunc<bvec2 (*)(const bvec2&,const bvec2&)>(
+			"_div", &detail::operator/);
+	c_bvec2.GlobalFunc<string (*)(const bvec2&)>(
+			"to_string", &to_string);
+	/* [TODO] modulo operator for unsigned ints? 
+	c_bvec2.GlobalFunc<bvec2 (*)(const bvec2&,const unsigned int&)>(
+			"_mod", &detail::operator%);
+			*/
+	RootTable(vm).Bind("bvec2", c_bvec2);
+	
+
+	/*
+	 * glm::bvec3
+	 */
+	Class<bvec3> c_bvec3(vm);
+	c_bvec3.Ctor();
+	c_bvec3.Ctor<unsigned int>();
+	c_bvec3.Ctor<unsigned int,unsigned int,unsigned int>();
+	c_bvec3.Var("x", &bvec3::x);
+	c_bvec3.Var("y", &bvec3::y);
+	c_bvec3.Var("z", &bvec3::z);
+	c_bvec3.Var("r", &bvec3::r);
+	c_bvec3.Var("g", &bvec3::g);
+	c_bvec3.Var("b", &bvec3::b);
+	c_bvec3.Var("s", &bvec3::r);
+	c_bvec3.Var("t", &bvec3::g);
+	c_bvec3.Var("p", &bvec3::b);
+	c_bvec3.GlobalFunc<bvec3 (*)(const bvec3&,const bvec3&)>(
+			"_add", &detail::operator+);
+	c_bvec3.GlobalFunc<bvec3 (*)(const bvec3&,const bvec3&)>(
+			"_sub", &detail::operator-);
+	c_bvec3.GlobalFunc<bvec3 (*)(const bvec3&,const bvec3&)>(
+			"_mul", &detail::operator*);
+	c_bvec3.GlobalFunc<bvec3 (*)(const bvec3&,const bvec3&)>(
+			"_div", &detail::operator/);
+	c_bvec3.GlobalFunc<string (*)(const bvec3&)>(
+			"to_string", &to_string);
+	/* [TODO] modulo operator for floats? 
+	c_bvec3.GlobalFunc<bvec3 (*)(const bvec3&,const int&)>(
+			"_mod", &detail::operator%);
+			*/
+	RootTable(vm).Bind("bvec3", c_bvec3);
+
+	/*
+	 * glm::bvec4
+	 */
+	Class<bvec4> c_bvec4(vm);
+	c_bvec4.Ctor();
+	c_bvec4.Ctor<unsigned int>();
+	c_bvec4.Ctor<unsigned int,unsigned int,unsigned int,unsigned int>();
+	c_bvec4.Var("x", &bvec4::x);
+	c_bvec4.Var("y", &bvec4::y);
+	c_bvec4.Var("z", &bvec4::z);
+	c_bvec4.Var("w", &bvec4::w);
+	c_bvec4.Var("r", &bvec4::r);
+	c_bvec4.Var("g", &bvec4::g);
+	c_bvec4.Var("b", &bvec4::b);
+	c_bvec4.Var("a", &bvec4::a);
+	c_bvec4.Var("s", &bvec4::s);
+	c_bvec4.Var("t", &bvec4::t);
+	c_bvec4.Var("p", &bvec4::p);
+	c_bvec4.Var("q", &bvec4::q);
+	c_bvec4.GlobalFunc<bvec4 (*)(const bvec4&,const bvec4&)>(
+			"_add", &detail::operator+);
+	c_bvec4.GlobalFunc<bvec4 (*)(const bvec4&,const bvec4&)>(
+			"_sub", &detail::operator-);
+	c_bvec4.GlobalFunc<bvec4 (*)(const bvec4&,const bvec4&)>(
+			"_mul", &detail::operator*);
+	c_bvec4.GlobalFunc<bvec4 (*)(const bvec4&,const bvec4&)>(
+			"_div", &detail::operator/);
+	c_bvec4.GlobalFunc<string (*)(const bvec4&)>(
+			"to_string", &to_string);
+	/* [TODO] modulo operator for floats? 
+	c_bvec4.GlobalFunc<bvec4 (*)(const bvec4&,const int&)>(
+			"_mod", &detail::operator%);
+			*/
+	RootTable(vm).Bind("bvec4", c_bvec4);
+}
+
+void bind_glm_consts(HSQUIRRELVM vm)
+{
+	using namespace Sqrat;
+	using namespace std;
+	using namespace glm;
+
+	ConstTable ct_glm(vm);
+	ct_glm.Const("GLM_INFINITY", numeric_limits<float>::infinity());
+	ct_glm.Const("GLM_QUIET_NAN", numeric_limits<float>::quiet_NaN());
+	ct_glm.Const("GLM_SIGNALING_NAN", numeric_limits<float>::signaling_NaN());
 }
 
 void bind_glm_core(HSQUIRRELVM vm)
@@ -328,7 +443,7 @@ void bind_glm_core(HSQUIRRELVM vm)
 	using namespace Sqrat;
 	using namespace std;
 	using namespace glm;
-
+	
 	Class<vec2> c_vec2(vm, "vec2", false);
 	Class<vec3> c_vec3(vm, "vec3", false);
 	Class<vec4> c_vec4(vm, "vec4", false);
@@ -409,6 +524,32 @@ void bind_glm_core(HSQUIRRELVM vm)
 			"fma", &glm::fma);
 	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&,const uvec4&,const uvec4&)>(
 			"fma", &glm::fma);
+
+	/*
+	 * fract availble only for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("fract", &glm::fract);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("fract", &glm::fract);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("fract", &glm::fract);
+
+	// ignoring: frexp (genType const &x, genIType &exp)
+	// ignoring: intBitsToFloat (int const &v)
+	// ignoring: intBitsToFloat (vecType< int, P > const &v)
+
+
+	/*
+	 * isinf available only for floats
+	 */
+	c_vec2.GlobalFunc<bvec2 (*)(const vec2&)>("isinf", &glm::isinf);
+	c_vec3.GlobalFunc<bvec3 (*)(const vec3&)>("isinf", &glm::isinf);
+	c_vec4.GlobalFunc<bvec4 (*)(const vec4&)>("isinf", &glm::isinf);
+
+	/*
+	 * isnan available only for floats
+	 */
+	c_vec2.GlobalFunc<bvec2 (*)(const vec2&)>("isnan", &glm::isnan);
+	c_vec3.GlobalFunc<bvec3 (*)(const vec3&)>("isnan", &glm::isnan);
+	c_vec4.GlobalFunc<bvec4 (*)(const vec4&)>("isnan", &glm::isnan);
 }
 
 static std::string to_string(const glm::vec2& kV)
@@ -471,6 +612,28 @@ static std::string to_string(const glm::uvec3& kV)
 }
 
 static std::string to_string(const glm::uvec4& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ","
+		+ std::to_string(kV.z) + ","
+		+ std::to_string(kV.w) + ")";
+}
+static std::string to_string(const glm::bvec2& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ")";
+}
+static std::string to_string(const glm::bvec3& kV)
+{
+	return "("
+		+ std::to_string(kV.x) + ","
+		+ std::to_string(kV.y) + ","
+		+ std::to_string(kV.z) + ")";
+}
+
+static std::string to_string(const glm::bvec4& kV)
 {
 	return "("
 		+ std::to_string(kV.x) + ","

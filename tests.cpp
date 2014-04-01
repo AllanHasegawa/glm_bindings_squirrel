@@ -47,7 +47,10 @@ int main()
 		//compile_and_run("test_scripts/abs.nut", script);
 		//compile_and_run("test_scripts/ceil.nut", script);
 		//compile_and_run("test_scripts/clamp.nut", script);
-		compile_and_run("test_scripts/fma.nut", script);
+		//compile_and_run("test_scripts/fma.nut", script);
+		//compile_and_run("test_scripts/fract.nut", script);
+		//compile_and_run("test_scripts/isinf.nut", script);
+		compile_and_run("test_scripts/isnan.nut", script);
 	}
 	sq_close(vm);
 
