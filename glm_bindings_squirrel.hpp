@@ -550,6 +550,139 @@ void bind_glm_core(HSQUIRRELVM vm)
 	c_vec2.GlobalFunc<bvec2 (*)(const vec2&)>("isnan", &glm::isnan);
 	c_vec3.GlobalFunc<bvec3 (*)(const vec3&)>("isnan", &glm::isnan);
 	c_vec4.GlobalFunc<bvec4 (*)(const vec4&)>("isnan", &glm::isnan);
+
+
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&)>(
+			"max", &glm::max);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&)>(
+			"max", &glm::max);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&)>(
+			"max", &glm::max);
+	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&,const ivec2&)>(
+			"max", &glm::max);
+	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&,const ivec3&)>(
+			"max", &glm::max);
+	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&,const ivec4&)>(
+			"max", &glm::max);
+	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&,const uvec2&)>(
+			"max", &glm::max);
+	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&,const uvec3&)>(
+			"max", &glm::max);
+	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&,const uvec4&)>(
+			"max", &glm::max);
+
+
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&)>(
+			"min", &glm::min);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&)>(
+			"min", &glm::min);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&)>(
+			"min", &glm::min);
+	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&,const ivec2&)>(
+			"min", &glm::min);
+	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&,const ivec3&)>(
+			"min", &glm::min);
+	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&,const ivec4&)>(
+			"min", &glm::min);
+	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&,const uvec2&)>(
+			"min", &glm::min);
+	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&,const uvec3&)>(
+			"min", &glm::min);
+	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&,const uvec4&)>(
+			"min", &glm::min);
+
+	// ignoring: mix (genTypeT const &x, genTypeT const &y, genTypeU const &a)
+
+
+	/*
+	 * mod available only for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&)>(
+			"mod", &glm::mod);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&)>(
+			"mod", &glm::mod);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&)>(
+			"mod", &glm::mod);
+
+	// ignoring: mod (genType const &x, typename genType::value_type const &y)
+
+	/*
+	 * mod available only for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,vec2&)>(
+			"modf", &glm::modf);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,vec3&)>(
+			"modf", &glm::modf);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,vec4&)>(
+			"modf", &glm::modf);
+
+	/*
+	 * round availble only for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("round", &glm::round);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("round", &glm::round);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("round", &glm::round);
+
+	/*
+	 * roundEven availble only for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("roundEven", &glm::roundEven);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("roundEven", &glm::roundEven);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("roundEven", &glm::roundEven);
+
+
+	/*
+	 * sign available for floats and signed ints
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("sign", &glm::sign);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("sign", &glm::sign);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("sign", &glm::sign);
+	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&)>("sign", &glm::sign);
+	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&)>("sign", &glm::sign);
+	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&)>("sign", &glm::sign);
+
+
+	/*
+	 * smoothstep available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&,const vec2&)>(
+			"smoothstep", &glm::smoothstep);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&,const vec3&)>(
+			"smoothstep", &glm::smoothstep);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&,const vec4&)>(
+			"smoothstep", &glm::smoothstep);
+
+
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&)>(
+			"step", &glm::step);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&)>(
+			"step", &glm::step);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&)>(
+			"step", &glm::step);
+	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&,const ivec2&)>(
+			"step", &glm::step);
+	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&,const ivec3&)>(
+			"step", &glm::step);
+	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&,const ivec4&)>(
+			"step", &glm::step);
+	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&,const uvec2&)>(
+			"step", &glm::step);
+	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&,const uvec3&)>(
+			"step", &glm::step);
+	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&,const uvec4&)>(
+			"step", &glm::step);
+
+	// ignoring: step (T const &edge, vecType< T, P > const &x)
+
+	/*
+	 * trunc available only for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("trunc", &glm::trunc);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("trunc", &glm::trunc);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("trunc", &glm::trunc);
+
+	// ignoring: uintBitsToFloat(uint const &v)
+	// ignoring: uintBitsToFloat(vecType< uint, P > const &v)
 }
 
 static std::string to_string(const glm::vec2& kV)

@@ -50,7 +50,16 @@ int main()
 		//compile_and_run("test_scripts/fma.nut", script);
 		//compile_and_run("test_scripts/fract.nut", script);
 		//compile_and_run("test_scripts/isinf.nut", script);
-		compile_and_run("test_scripts/isnan.nut", script);
+		//compile_and_run("test_scripts/isnan.nut", script);
+		//compile_and_run("test_scripts/max.nut", script);
+		//compile_and_run("test_scripts/min.nut", script);
+		//compile_and_run("test_scripts/mod.nut", script);
+		//compile_and_run("test_scripts/modf.nut", script);
+		//compile_and_run("test_scripts/round.nut", script);
+		//compile_and_run("test_scripts/sign.nut", script);
+		//compile_and_run("test_scripts/smoothstep.nut", script);
+		//compile_and_run("test_scripts/step.nut", script);
+		compile_and_run("test_scripts/trunc.nut", script);
 	}
 	sq_close(vm);
 
