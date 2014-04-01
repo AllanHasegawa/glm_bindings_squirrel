@@ -6,6 +6,8 @@
 #include <sqrat.h>
 
 
+namespace gbs {
+
 static std::string to_string(const glm::vec2& kV);
 static std::string to_string(const glm::vec3& kV);
 static std::string to_string(const glm::vec4& kV);
@@ -941,4 +943,6 @@ static std::string to_string(const glm::bvec4& kV)
 		+ std::to_string(kV.y) + ","
 		+ std::to_string(kV.z) + ","
 		+ std::to_string(kV.w) + ")";
+}
+
 }
