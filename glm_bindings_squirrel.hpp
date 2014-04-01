@@ -21,13 +21,15 @@ static std::string to_string(const glm::bvec4& kV);
 
 void bind_glm_consts(HSQUIRRELVM vm);
 void bind_glm_vec_types(HSQUIRRELVM);
-void bind_glm_core(HSQUIRRELVM);
+void bind_glm_core_common(HSQUIRRELVM);
+void bind_glm_core_geometric(HSQUIRRELVM);
 
 void bind_glm_squirrel(HSQUIRRELVM vm)
 {
 	bind_glm_consts(vm);
 	bind_glm_vec_types(vm);
-	bind_glm_core(vm);
+	bind_glm_core_common(vm);
+	bind_glm_core_geometric(vm);
 }
 
 void bind_glm_vec_types(HSQUIRRELVM vm)
@@ -438,7 +440,7 @@ void bind_glm_consts(HSQUIRRELVM vm)
 	ct_glm.Const("GLM_SIGNALING_NAN", numeric_limits<float>::signaling_NaN());
 }
 
-void bind_glm_core(HSQUIRRELVM vm)
+void bind_glm_core_common(HSQUIRRELVM vm)
 {
 	using namespace Sqrat;
 	using namespace std;
@@ -683,6 +685,100 @@ void bind_glm_core(HSQUIRRELVM vm)
 
 	// ignoring: uintBitsToFloat(uint const &v)
 	// ignoring: uintBitsToFloat(vecType< uint, P > const &v)
+}
+
+void bind_glm_core_geometric(HSQUIRRELVM vm)
+{
+	using namespace Sqrat;
+	using namespace std;
+	using namespace glm;
+	
+	Class<vec2> c_vec2(vm, "vec2", false);
+	Class<vec3> c_vec3(vm, "vec3", false);
+	Class<vec4> c_vec4(vm, "vec4", false);
+	Class<ivec2> c_ivec2(vm, "ivec2", false);
+	Class<ivec3> c_ivec3(vm, "ivec3", false);
+	Class<ivec4> c_ivec4(vm, "ivec4", false);
+	Class<uvec2> c_uvec2(vm, "uvec2", false);
+	Class<uvec3> c_uvec3(vm, "uvec3", false);
+	Class<uvec4> c_uvec4(vm, "uvec4", false);
+
+
+	/*
+	 * cross available for tvec3 only
+	 */
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&)>(
+			"cross", &glm::cross);
+
+
+	/*
+	 * distance available for floats only
+	 */
+	c_vec2.GlobalFunc<float (*)(const vec2&,const vec2&)>(
+			"distance", &glm::distance);
+	c_vec3.GlobalFunc<float (*)(const vec3&,const vec3&)>(
+			"distance", &glm::distance);
+	c_vec4.GlobalFunc<float (*)(const vec4&,const vec4&)>(
+			"distance", &glm::distance);
+
+	/*
+	 * dot available for floats only
+	 */
+	c_vec2.GlobalFunc<float (*)(const vec2&,const vec2&)>(
+			"dot", &glm::dot);
+	c_vec3.GlobalFunc<float (*)(const vec3&,const vec3&)>(
+			"dot", &glm::dot);
+	c_vec4.GlobalFunc<float (*)(const vec4&,const vec4&)>(
+			"dot", &glm::dot);
+
+	// ignoring: dot (genType const &x, genType const &y)
+
+
+	/*
+	 * faceforward available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&,const vec2&)>(
+			"faceforward", &glm::faceforward);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&,const vec3&)>(
+			"faceforward", &glm::faceforward);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&,const vec4&)>(
+			"faceforward", &glm::faceforward);
+
+
+	/*
+	 * length available for floats
+	 */
+	c_vec2.GlobalFunc<float (*)(const vec2&)>("length", &glm::length);
+	c_vec3.GlobalFunc<float (*)(const vec3&)>("length", &glm::length);
+	c_vec4.GlobalFunc<float (*)(const vec4&)>("length", &glm::length);
+
+	/*
+	 * normalize available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("normalize", &glm::normalize);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("normalize", &glm::normalize);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("normalize", &glm::normalize);
+
+
+	/*
+	 * reflect available for floats only
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&)>(
+			"reflect", &glm::reflect);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&)>(
+			"reflect", &glm::reflect);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&)>(
+			"reflect", &glm::reflect);
+
+	/*
+	 * refract available for floats only
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&,const float&)>(
+			"refract", &glm::refract);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&,const float&)>(
+			"refract", &glm::refract);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&,const float&)>(
+			"refract", &glm::refract);
 }
 
 static std::string to_string(const glm::vec2& kV)
