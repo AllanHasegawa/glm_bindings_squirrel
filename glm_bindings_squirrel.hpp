@@ -23,6 +23,7 @@ void bind_glm_consts(HSQUIRRELVM vm);
 void bind_glm_vec_types(HSQUIRRELVM);
 void bind_glm_core_common(HSQUIRRELVM);
 void bind_glm_core_geometric(HSQUIRRELVM);
+void bind_glm_core_exponential(HSQUIRRELVM);
 
 void bind_glm_squirrel(HSQUIRRELVM vm)
 {
@@ -30,6 +31,7 @@ void bind_glm_squirrel(HSQUIRRELVM vm)
 	bind_glm_vec_types(vm);
 	bind_glm_core_common(vm);
 	bind_glm_core_geometric(vm);
+	bind_glm_core_exponential(vm);
 }
 
 void bind_glm_vec_types(HSQUIRRELVM vm)
@@ -779,6 +781,76 @@ void bind_glm_core_geometric(HSQUIRRELVM vm)
 			"refract", &glm::refract);
 	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&,const float&)>(
 			"refract", &glm::refract);
+}
+
+void bind_glm_core_exponential(HSQUIRRELVM vm)
+{
+	using namespace Sqrat;
+	using namespace std;
+	using namespace glm;
+	
+	Class<vec2> c_vec2(vm, "vec2", false);
+	Class<vec3> c_vec3(vm, "vec3", false);
+	Class<vec4> c_vec4(vm, "vec4", false);
+	Class<ivec2> c_ivec2(vm, "ivec2", false);
+	Class<ivec3> c_ivec3(vm, "ivec3", false);
+	Class<ivec4> c_ivec4(vm, "ivec4", false);
+	Class<uvec2> c_uvec2(vm, "uvec2", false);
+	Class<uvec3> c_uvec3(vm, "uvec3", false);
+	Class<uvec4> c_uvec4(vm, "uvec4", false);
+
+
+	/*
+	 * exp available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("exp", &glm::exp);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("exp", &glm::exp);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("exp", &glm::exp);
+
+	/*
+	 * exp2 available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("exp2", &glm::exp2);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("exp2", &glm::exp2);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("exp2", &glm::exp2);
+
+
+	/*
+	 * inversesqrt available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("inversesqrt", &glm::inversesqrt);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("inversesqrt", &glm::inversesqrt);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("inversesqrt", &glm::inversesqrt);
+
+
+	/*
+	 * log available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("log", &glm::log);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("log", &glm::log);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("log", &glm::log);
+
+	/*
+	 * log2 available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("log2", &glm::log2);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("log2", &glm::log2);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("log2", &glm::log2);
+
+
+	/*
+	 * pow available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&)>("pow", &glm::pow);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&)>("pow", &glm::pow);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&)>("pow", &glm::pow);
+
+	/*
+	 * sqrt available for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("sqrt", &glm::sqrt);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("sqrt", &glm::sqrt);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("sqrt", &glm::sqrt);
 }
 
 static std::string to_string(const glm::vec2& kV)
