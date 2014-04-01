@@ -8,7 +8,7 @@ Simple [GLM](http://glm.g-truc.net/0.9.5/index.html) bindings for the [Squirrel 
 - Sqrat (from [git repository](http://sourceforge.net/p/scrat/code/ci/master/tree/) 04/01/2014)
 - glm 0.9.5
 
-## Instalation
+## Installation
 
 - Copy and include **glm_bindings_squirrel.hpp** to your project
 - Setup Squirrel and Sqrat
