@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <functional>
 
 #include <glm/glm.hpp>
 #include <sqrat.h>
@@ -10,6 +11,7 @@
 using namespace std;
 using namespace Sqrat;
 using namespace glm;
+using namespace gbs;
 
 static void printfunc(HSQUIRRELVM v,const SQChar *s,...) {
 	va_list vl;
@@ -59,7 +61,29 @@ int main()
 		//compile_and_run("test_scripts/sign.nut", script);
 		//compile_and_run("test_scripts/smoothstep.nut", script);
 		//compile_and_run("test_scripts/step.nut", script);
-		compile_and_run("test_scripts/trunc.nut", script);
+		//compile_and_run("test_scripts/trunc.nut", script);
+		{
+			// Just getting a return is simple
+			compile_and_run("test_scripts/add_native_var.nut", script);
+			Function f(RootTable(vm), "squirrel_add");
+			glm::vec3 a{0,1,2};
+			glm::vec3 b{1,2,3};
+			SharedPtr<vec3> ic = f.Evaluate<vec3,vec3,vec3>(a,b);
+			cout << to_string(*ic) << endl;
+
+			// In Squirrel, all primitive types pass by value.
+			// To pass by "ref", pass via array.
+			Function f2(RootTable(vm), "squirrel_add_ref");
+			cout << to_string(a) << endl;
+			Array aa(vm);
+			aa.Append(&a);
+			Array ab(vm);
+			ab.Append(&b);
+			f2.Execute(aa,ab);
+			cout << "a: " << to_string(a) << endl;
+			cout << "a: " << to_string(*(aa.GetValue<vec3>(0))) << endl;
+			cout << "b: " << to_string(b) << endl;
+		}
 	}
 	sq_close(vm);
 
