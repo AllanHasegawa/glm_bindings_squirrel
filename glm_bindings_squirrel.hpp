@@ -330,31 +330,85 @@ void bind_glm_core(HSQUIRRELVM vm)
 	using namespace glm;
 
 	Class<vec2> c_vec2(vm, "vec2", false);
-	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("abs", &glm::abs);
-
 	Class<vec3> c_vec3(vm, "vec3", false);
-	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("abs", &glm::abs);
-
 	Class<vec4> c_vec4(vm, "vec4", false);
-	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("abs", &glm::abs);
-
 	Class<ivec2> c_ivec2(vm, "ivec2", false);
-	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&)>("abs", &glm::abs);
-
 	Class<ivec3> c_ivec3(vm, "ivec3", false);
-	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&)>("abs", &glm::abs);
-
 	Class<ivec4> c_ivec4(vm, "ivec4", false);
-	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&)>("abs", &glm::abs);
-
 	Class<uvec2> c_uvec2(vm, "uvec2", false);
-	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&)>("abs", &glm::abs);
-
 	Class<uvec3> c_uvec3(vm, "uvec3", false);
-	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&)>("abs", &glm::abs);
-
 	Class<uvec4> c_uvec4(vm, "uvec4", false);
+
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("abs", &glm::abs);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("abs", &glm::abs);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("abs", &glm::abs);
+	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&)>("abs", &glm::abs);
+	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&)>("abs", &glm::abs);
+	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&)>("abs", &glm::abs);
+	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&)>("abs", &glm::abs);
+	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&)>("abs", &glm::abs);
 	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&)>("abs", &glm::abs);
+
+	/*
+	 * ceil available only for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("ceil", &glm::ceil);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("ceil", &glm::ceil);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("ceil", &glm::ceil);
+
+	c_vec2.GlobalFunc<vec2 (*)(
+			const vec2&,const float&,const float&)>( "clamp", &glm::clamp);
+	c_vec3.GlobalFunc<vec3 (*)(
+			const vec3&,const float&,const float&)>("clamp", &glm::clamp);
+	c_vec4.GlobalFunc<vec4 (*)(
+			const vec4&,const float&,const float&)>("clamp", &glm::clamp);
+	c_ivec2.GlobalFunc<ivec2 (*)(
+			const ivec2&,const int&,const int&)>("clamp", &glm::clamp);
+	c_ivec3.GlobalFunc<ivec3 (*)(
+			const ivec3&,const int&,const int&)>("clamp", &glm::clamp);
+	c_ivec4.GlobalFunc<ivec4 (*)(
+			const ivec4&,const int&,const int&)>("clamp", &glm::clamp);
+	c_uvec2.GlobalFunc<uvec2 (*)(
+			const uvec2&,const unsigned int&,const unsigned int&)>(
+				"clamp", &glm::clamp);
+	c_uvec3.GlobalFunc<uvec3 (*)(
+			const uvec3&,const unsigned int&,const unsigned int&)>(
+				"clamp", &glm::clamp);
+	c_uvec4.GlobalFunc<uvec4 (*)(
+			const uvec4&,const unsigned int&,const unsigned int&)>(
+				"clamp", &glm::clamp);
+
+	// ignoring: floatBitsToInt (float const &v)
+	// ignoring: floatBitsToInt (vecType< float, P > const &v)
+	// ignoring: floatBitsToUint (float const &v)
+	// ignoring: floatBitsToUint (vecType< float, P > const &v)
+
+	/*
+	 * floor available only for floats
+	 */
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&)>("floor", &glm::floor);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&)>("floor", &glm::floor);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&)>("floor", &glm::floor);
+
+
+	c_vec2.GlobalFunc<vec2 (*)(const vec2&,const vec2&,const vec2&)>(
+			"fma", &glm::fma);
+	c_vec3.GlobalFunc<vec3 (*)(const vec3&,const vec3&,const vec3&)>(
+			"fma", &glm::fma);
+	c_vec4.GlobalFunc<vec4 (*)(const vec4&,const vec4&,const vec4&)>(
+			"fma", &glm::fma);
+	c_ivec2.GlobalFunc<ivec2 (*)(const ivec2&,const ivec2&,const ivec2&)>(
+			"fma", &glm::fma);
+	c_ivec3.GlobalFunc<ivec3 (*)(const ivec3&,const ivec3&,const ivec3&)>(
+			"fma", &glm::fma);
+	c_ivec4.GlobalFunc<ivec4 (*)(const ivec4&,const ivec4&,const ivec4&)>(
+			"fma", &glm::fma);
+	c_uvec2.GlobalFunc<uvec2 (*)(const uvec2&,const uvec2&,const uvec2&)>(
+			"fma", &glm::fma);
+	c_uvec3.GlobalFunc<uvec3 (*)(const uvec3&,const uvec3&,const uvec3&)>(
+			"fma", &glm::fma);
+	c_uvec4.GlobalFunc<uvec4 (*)(const uvec4&,const uvec4&,const uvec4&)>(
+			"fma", &glm::fma);
 }
 
 static std::string to_string(const glm::vec2& kV)

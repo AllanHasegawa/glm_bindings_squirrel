@@ -42,9 +42,12 @@ int main()
 		bind_glm_squirrel(vm);
 
 		Script script(vm);
-		compile_and_run("test_scripts/vec2_ops.nut", script);
-		compile_and_run("test_scripts/vec3_ops.nut", script);
-		compile_and_run("test_scripts/abs.nut", script);
+		//compile_and_run("test_scripts/vec2_ops.nut", script);
+		//compile_and_run("test_scripts/vec3_ops.nut", script);
+		//compile_and_run("test_scripts/abs.nut", script);
+		//compile_and_run("test_scripts/ceil.nut", script);
+		//compile_and_run("test_scripts/clamp.nut", script);
+		compile_and_run("test_scripts/fma.nut", script);
 	}
 	sq_close(vm);
 
