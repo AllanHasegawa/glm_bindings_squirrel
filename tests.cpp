@@ -44,24 +44,6 @@ int main()
 		bind_glm_squirrel(vm);
 
 		Script script(vm);
-		//compile_and_run("test_scripts/vec2_ops.nut", script);
-		//compile_and_run("test_scripts/vec3_ops.nut", script);
-		//compile_and_run("test_scripts/abs.nut", script);
-		//compile_and_run("test_scripts/ceil.nut", script);
-		//compile_and_run("test_scripts/clamp.nut", script);
-		//compile_and_run("test_scripts/fma.nut", script);
-		//compile_and_run("test_scripts/fract.nut", script);
-		//compile_and_run("test_scripts/isinf.nut", script);
-		//compile_and_run("test_scripts/isnan.nut", script);
-		//compile_and_run("test_scripts/max.nut", script);
-		//compile_and_run("test_scripts/min.nut", script);
-		//compile_and_run("test_scripts/mod.nut", script);
-		//compile_and_run("test_scripts/modf.nut", script);
-		//compile_and_run("test_scripts/round.nut", script);
-		//compile_and_run("test_scripts/sign.nut", script);
-		//compile_and_run("test_scripts/smoothstep.nut", script);
-		//compile_and_run("test_scripts/step.nut", script);
-		//compile_and_run("test_scripts/trunc.nut", script);
 		{
 			// Just getting a return is simple
 			compile_and_run("test_scripts/add_native_var.nut", script);
